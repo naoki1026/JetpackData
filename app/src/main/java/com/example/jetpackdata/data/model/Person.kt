@@ -9,6 +9,8 @@ class Person(name:String, mail:String, age:Int){
     val mail = mail
     val age = age
 
+    fun age_s() : String = age.toString()
+
     fun to_s() : Any?{
         return "$name: ($mail, $age)"
     }
