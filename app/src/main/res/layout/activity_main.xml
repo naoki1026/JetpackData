@@ -7,6 +7,9 @@
         <variable
             name="viewModel"
             type="com.example.jetpackdata.viewModel.MyViewModel" />
+        <variable
+            name="person"
+            type="com.example.jetpackdata.data.model.Person" />
 
     </data>
 
@@ -49,7 +52,7 @@
             android:layout_marginEnd="12dp"
             android:ems="10"
             android:hint="Name"
-            android:text="@{viewModel.person.name}"
+            android:text="@{person.name}"
             android:inputType="textPersonName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -64,7 +67,7 @@
             android:layout_marginEnd="12dp"
             android:ems="10"
             android:hint="Mail"
-            android:text="@{viewModel.person.mail}"
+            android:text="@{person.mail}"
             android:inputType="textEmailAddress"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -80,7 +83,7 @@
             android:layout_marginEnd="12dp"
             android:ems="10"
             android:hint="Age"
-            android:text="@{viewModel.person.age_s()}"
+            android:text="@{person.age}"
             android:inputType="number"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"

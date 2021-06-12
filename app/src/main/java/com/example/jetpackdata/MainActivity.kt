@@ -3,7 +3,6 @@ package com.example.jetpackdata
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
-import com.example.jetpackdata.data.model.Person
 import com.example.jetpackdata.viewModel.MyViewModel
 import com.example.jetpackdata.databinding.ActivityMainBinding
 
@@ -21,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         val myViewModel : MyViewModel = ViewModelProvider(this).get(MyViewModel::class.java)
 
         binding.viewModel = myViewModel
-        binding.text1.text = myViewModel.allText
+        binding.person = myViewModel.person.get()
 
         binding.button1.setOnClickListener {
             val n = binding.frmName.text.toString()
@@ -29,9 +28,10 @@ class MainActivity : AppCompatActivity() {
             val a = binding.frmAge.text.toString().toInt()
 
             myViewModel.add(n, m, a)
-            myViewModel.person = Person(n, m, a)
-            myViewModel.allText = myViewModel.allByText()
-            binding.text1.text = myViewModel.allText
+            myViewModel.person.get()!!.name.set("name")
+            myViewModel.person.get()!!.mail.set("mail@address")
+            myViewModel.person.get()!!.age.set("0")
+            myViewModel.allText.set(myViewModel.allByText())
         }
     }
 }

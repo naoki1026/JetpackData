@@ -1,17 +1,21 @@
 package com.example.jetpackdata.data.model
 
+import androidx.databinding.ObservableField
+
 
 // データクラス
 // 何もしないデータを保持するだけのクラス
 
 class Person(name:String, mail:String, age:Int){
-    val name = name
-    val mail = mail
-    val age = age
+    var name = ObservableField<String>()
+    var mail = ObservableField<String>()
+    var age = ObservableField<String>()
 
-    fun age_s() : String = age.toString()
-
-    fun to_s() : Any?{
-        return "$name: ($mail, $age)"
+    init {
+        this.name.set(name)
+        this.mail.set(mail)
+        this.age.set(age.toString())
     }
+
+    fun to_s() : String = "${name.get()} (${mail.get()}, ${age.get()})"
 }
