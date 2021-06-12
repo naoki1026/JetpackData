@@ -3,6 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="v_name"
+            type="String" />
+        <variable
+            name="v_pass"
+            type="String" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -17,6 +26,7 @@
             android:layout_marginEnd="12dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            android:text='@{v_name.equals(v_pass) ? "Change Password!" : "OK!!"}'
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
@@ -30,7 +40,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/frm_age" />
+            app:layout_constraintTop_toBottomOf="@+id/frm_pass" />
 
         <EditText
             android:id="@+id/frm_name"
@@ -47,33 +57,19 @@
             app:layout_constraintTop_toBottomOf="@+id/text1" />
 
         <EditText
-            android:id="@+id/frm_email"
+            android:id="@+id/frm_pass"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="12dp"
             android:ems="10"
-            android:hint="Mail"
-            android:inputType="textEmailAddress"
+            android:hint="Password"
+            android:inputType="textWebPassword"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/frm_name" />
 
-        <EditText
-            android:id="@+id/frm_age"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="12dp"
-            android:ems="10"
-            android:hint="Age"
-            android:inputType="number"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/frm_email" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
