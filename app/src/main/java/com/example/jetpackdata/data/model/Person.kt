@@ -7,15 +7,10 @@ import androidx.databinding.ObservableField
 // 何もしないデータを保持するだけのクラス
 
 class Person(name:String, mail:String, age:Int){
-    var name = ObservableField<String>()
-    var mail = ObservableField<String>()
-    var age = ObservableField<String>()
+    var name : String = name
+    var mail : String = mail
+    var age : Int = age
 
-    init {
-        this.name.set(name)
-        this.mail.set(mail)
-        this.age.set(age.toString())
-    }
-
-    fun to_s() : String = "${name.get()} (${mail.get()}, ${age.get()})"
+    fun age_s() : String = age.toString()
+    fun to_s() : Any? = "$name : ($mail, $age)"
 }

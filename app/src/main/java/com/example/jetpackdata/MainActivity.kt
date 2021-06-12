@@ -2,9 +2,14 @@ package com.example.jetpackdata
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.TextView
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.example.jetpackdata.data.model.Person
 import com.example.jetpackdata.viewModel.MyViewModel
 import com.example.jetpackdata.databinding.ActivityMainBinding
+import org.w3c.dom.Text
 
 class MainActivity : AppCompatActivity() {
 
@@ -16,22 +21,47 @@ class MainActivity : AppCompatActivity() {
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // MyViewModelでViewModel()を継承する必要がある
-        val myViewModel : MyViewModel = ViewModelProvider(this).get(MyViewModel::class.java)
+        val myViewModel = ViewModelProvider(this).get(MyViewModel::class.java)
 
-        binding.viewModel = myViewModel
-        binding.person = myViewModel.person.get()
+        // Name
+        val nameObserver = Observer<String> { newName ->
+            binding.frmName.setText(newName, TextView.BufferType.NORMAL)
+        }
+        myViewModel.name.observe(this, nameObserver)
+
+        // Mail
+        val mailObserver = Observer<String> { newMail ->
+            binding.frmEmail.setText(newMail, TextView.BufferType.NORMAL)
+        }
+        myViewModel.mail.observe(this, mailObserver)
+
+        // Age
+        val ageObserver = Observer<String> { newAge ->
+            binding.frmAge.setText(newAge, TextView.BufferType.NORMAL)
+        }
+        myViewModel.age.observe(this, ageObserver)
+
+        // All
+        val allObserver = Observer<String> { newAll ->
+            binding.text1.setText(newAll, TextView.BufferType.NORMAL)
+        }
+        myViewModel.allText.observe(this, allObserver)
+
 
         binding.button1.setOnClickListener {
-            val n = binding.frmName.text.toString()
-            val m = binding.frmEmail.text.toString()
-            val a = binding.frmAge.text.toString().toInt()
+            myViewModel.add(
+                binding.frmName.text.toString(),
+                binding.frmEmail.text.toString(),
+                binding.frmAge.text.toString().toInt()
+            )
 
-            myViewModel.add(n, m, a)
-            myViewModel.person.get()!!.name.set("name")
-            myViewModel.person.get()!!.mail.set("mail@address")
-            myViewModel.person.get()!!.age.set("0")
-            myViewModel.allText.set(myViewModel.allByText())
+            myViewModel.name.value = ""
+            myViewModel.mail.value = ""
+            myViewModel.age.value = "0"
+            myViewModel.allText.value = myViewModel.allByText()
         }
+
+
+
     }
 }
