@@ -1,16 +1,13 @@
 package com.example.jetpackdata
 
+import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.TextView
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
-import com.example.jetpackdata.bindingAdapter.PersonBinding
-import com.example.jetpackdata.data.model.Person
-import com.example.jetpackdata.viewModel.MyViewModel
 import com.example.jetpackdata.databinding.ActivityMainBinding
-import org.w3c.dom.Text
+import com.example.jetpackdata.viewModel.MyViewModel
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,10 +16,28 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val myViewModel = ViewModelProvider(this).get(MyViewModel::class.java)
+
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.obj = PersonBinding()
+        binding.text1.text = myViewModel.allByText()
+        binding.button1.setOnClickListener {
+            val builder = AlertDialog.Builder(this)
+            builder.setTitle("Alert")
+                .setMessage("Add new persond data?")
+                .setPositiveButton("OK", DialogInterface.OnClickListener{ dialog, id ->
+                    myViewModel.add("new name", "new@mail.address", 123)
+                    binding.text1.text = myViewModel.allByText()
+                })
+                .setNegativeButton("Cancel", DialogInterface.OnClickListener{ dialog, id ->
+                    Toast.makeText(this, "Canceled.", Toast.LENGTH_SHORT).show()
+                })
+            builder.create().show()
+        }
+
+
 
     }
 }

@@ -9,58 +9,28 @@ import com.example.jetpackdata.data.model.Person
 
 class MyViewModel : ViewModel() {
 
-    private val TAG = "MainViewModel"
-
-    // ライブデータで扱うプロパティは全てvalで定数として宣言する必要がある
-    val data : MutableLiveData<MutableList<Person>> by lazy {
-        MutableLiveData<MutableList<Person>>()
-    }
-
-    val name : MutableLiveData<String> by lazy {
-        MutableLiveData<String>()
-    }
-
-    val mail : MutableLiveData<String> by lazy {
-        MutableLiveData<String>()
-    }
-
-    val age : MutableLiveData<String> by lazy {
-        MutableLiveData<String>()
-    }
-
-    val allText : MutableLiveData<String> by lazy {
-        MutableLiveData<String>()
-    }
+    var data : MutableList<Person> = mutableListOf(
+        Person("Taro", "taro@yamada", 36),
+        Person("Hanako", "hanako@flower", 25),
+        Person("Sachiko", "sachiko@happy", 14)
+    )
 
     fun allByText():String {
-        var res = String()
-        for(item in data.value!!){
+        var res = ""
+        for (item in data) {
             res += item.to_s()
             res += "\n"
         }
         return res
     }
 
-    fun getById(id:Int):Person = data.value!!.get(id)
-
-    fun add(nm:String, ml:String, ag:Int){
-        data.value?.add(Person(nm, ml, ag))
+    fun getById(id:Int) : Person = data[id]
+    fun add(name:String, mail:String, age:Int) {
+       data.add(Person(name, mail, age))
     }
 
-    // MutableLiveDataプロパティの値の設定はinitメソッドで行なっている
-    init  {
-        data.value = mutableListOf(
-            Person("Taro", "taro@yamada", 36),
-            Person("Hanako", "hanako@flower", 25),
-            Person("Sachiko", "sachiko@happy", 14)
-        )
 
-        // valueというプロパティは、MutableLiveDataで管理する値である
-        allText.value = allByText()
-        name.value = "name"
-        mail.value = "mail@address"
-        age.value = "0"
-    }
+
 }
 
 
