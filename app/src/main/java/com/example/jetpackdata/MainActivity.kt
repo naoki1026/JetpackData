@@ -6,6 +6,7 @@ import android.widget.TextView
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.example.jetpackdata.bindingAdapter.PersonBinding
 import com.example.jetpackdata.data.model.Person
 import com.example.jetpackdata.viewModel.MyViewModel
 import com.example.jetpackdata.databinding.ActivityMainBinding
@@ -21,13 +22,7 @@ class MainActivity : AppCompatActivity() {
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.vName = ""
-        binding.vPass = ""
-
-        binding.button1.setOnClickListener {
-            binding.vName = binding.frmName.text.toString()
-            binding.vPass = binding.frmPass.text.toString()
-        }
+        binding.obj = PersonBinding()
 
     }
 }
